@@ -1,0 +1,35 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { jwtDecode } from 'jwt-decode';
+import { BehaviorSubject, Observable } from 'rxjs';
+@Injectable({
+  providedIn: 'root',
+})
+export class AuthService {
+  constructor(private _HttpClient: HttpClient, private Router: Router) {}
+
+  userData = new BehaviorSubject(null);
+
+  private url = 'https://route-ecommerce.onrender.com/api/v1/';
+
+  decodeUseData() {
+    let encodeToken = JSON.stringify(localStorage.getItem('userToken'));
+    let decodeToken: any = jwtDecode(encodeToken);
+    this.userData.next(decodeToken);
+  }
+
+  register(userData: object): Observable<any> {
+    return this._HttpClient.post(this.url + 'auth/signup', userData);
+  }
+
+  login(userData: object): Observable<any> {
+    return this._HttpClient.post(this.url + 'auth/signin', userData);
+  }
+
+  // logOut() {
+    // localStorage.removeItem('userToken');
+    // this.userData.next(null);
+    // this.Router.navigate(['/login']);
+  // }
+}
