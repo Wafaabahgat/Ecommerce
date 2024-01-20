@@ -3,11 +3,16 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
 import { BehaviorSubject, Observable } from 'rxjs';
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class AuthService {
-  constructor(private _HttpClient: HttpClient, private Router: Router) {}
+  constructor(private HttpClient: HttpClient) {
+    if (
+      typeof window !== 'undefined' &&
+      localStorage.getItem('userToken') !== null
+    ) {
+      this.decodeUseData();
+    }
+  }
 
   userData = new BehaviorSubject(null);
 
@@ -20,16 +25,16 @@ export class AuthService {
   }
 
   register(userData: object): Observable<any> {
-    return this._HttpClient.post(this.url + 'auth/signup', userData);
+    return this.HttpClient.post(this.url + 'auth/signup', userData);
   }
 
   login(userData: object): Observable<any> {
-    return this._HttpClient.post(this.url + 'auth/signin', userData);
+    return this.HttpClient.post(this.url + 'auth/signin', userData);
   }
 
   // logOut() {
-    // localStorage.removeItem('userToken');
-    // this.userData.next(null);
-    // this.Router.navigate(['/login']);
+  // localStorage.removeItem('userToken');
+  // this.userData.next(null);
+  // this.Router.navigate(['/login']);
   // }
 }

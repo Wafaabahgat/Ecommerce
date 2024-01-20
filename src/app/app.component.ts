@@ -7,7 +7,10 @@ import { FooterComponent } from './footer/footer.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './auth.service';
 import { ProductsService } from './products.service';
+import { InjectionToken } from '@angular/core';
+import { AuthGuard } from './auth.guard';
 
+export const AUTH_GUARD_TOKEN = new InjectionToken<any>('auth.guard.token');
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -22,7 +25,15 @@ import { ProductsService } from './products.service';
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
-  providers: [AuthService, ProductsService],
+  providers: [
+    AuthService,
+    ProductsService,
+    {
+      provide: AUTH_GUARD_TOKEN,
+      useValue: AuthGuard,
+    },
+    // AuthGuard,
+  ],
 })
 export class AppComponent {
   title = 'angular';

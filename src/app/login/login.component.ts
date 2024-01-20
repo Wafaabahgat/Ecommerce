@@ -35,7 +35,8 @@ export class LoginComponent {
           this.AuthService.decodeUseData();
           if (response.msg === 'success') {
             this.isLoading = false;
-            this.router.navigateByUrl('/');
+            this.router.navigate(['/home']).then(() => window.location.reload());
+            // this.router.navigate(['/']);
           }
         },
         error: (err) => {
