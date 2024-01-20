@@ -28,5 +28,6 @@ export class NavbarComponent {
   logOut() {
     localStorage.removeItem('userToken');
     this.authService.userData.next(null);
+    alert('sure you want to logout!');
   }
 }

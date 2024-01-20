@@ -36,14 +36,14 @@ export class RegisterComponent {
       this.isLoading = true;
       this.AuthService.register(registerForm.value).subscribe({
         next: (response) => {
-          if (response.msg === 'success') {
+          if (response.message === 'success') {
             this.isLoading = false;
             this.Router.navigate(['/login']);
           }
         },
         error: (err) => {
           this.isLoading = false;
-          this.ApiError = err.msg;
+          this.ApiError = err.message;
         },
       });
     }

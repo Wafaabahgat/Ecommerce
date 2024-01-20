@@ -33,7 +33,7 @@ export class LoginComponent {
         next: (response) => {
           localStorage.setItem('userToken', response.token);
           this.AuthService.decodeUseData();
-          if (response.msg === 'success') {
+          if (response.message === 'success') {
             this.isLoading = false;
             this.router.navigate(['/home']).then(() => window.location.reload());
             // this.router.navigate(['/']);
@@ -41,7 +41,7 @@ export class LoginComponent {
         },
         error: (err) => {
           this.isLoading = false;
-          this.ApiError = err.msg;
+          this.ApiError = err.message;
         },
       });
     }
