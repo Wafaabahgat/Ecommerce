@@ -1,5 +1,10 @@
-<app-navbar></app-navbar>
-<div class="container">
-  <router-outlet></router-outlet>
+<div>
+  <app-navbar></app-navbar>
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+  <app-footer></app-footer>
+  <div class="overlay" *ngIf="showLoader">
+    <div class="loader"></div>
+  </div>
 </div>
-<app-footer></app-footer>

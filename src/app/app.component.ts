@@ -1,6 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet, RouterModule } from '@angular/router';
+import {
+  RouterOutlet,
+  RouterModule,
+  Router,
+  Event,
+  NavigationStart,
+  NavigationEnd,
+  NavigationCancel,
+  NavigationError,
+} from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
@@ -37,4 +46,23 @@ export const AUTH_GUARD_TOKEN = new InjectionToken<any>('auth.guard.token');
 })
 export class AppComponent {
   title = 'angular';
+  showLoader: boolean = false;
+  constructor(private router: Router) {}
+  // router: Router = inject(Router);
+
+  ngOnInit() {
+    this.router.events.subscribe((routerEvent: Event) => {
+      if (routerEvent instanceof NavigationStart) {
+        this.showLoader = true;
+      }
+
+      if (
+        routerEvent instanceof NavigationEnd ||
+        routerEvent instanceof NavigationCancel ||
+        routerEvent instanceof NavigationError
+      ) {
+        this.showLoader = false;
+      }
+    });
+  }
 }
