@@ -1,5 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import {
   RouterOutlet,
   RouterModule,
@@ -18,6 +19,8 @@ import { AuthService } from './auth.service';
 import { ProductsService } from './products.service';
 import { InjectionToken } from '@angular/core';
 import { AuthGuard } from './auth.guard';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+//import { BrowserModule } from '@angular/platform-browser';
 
 export const AUTH_GUARD_TOKEN = new InjectionToken<any>('auth.guard.token');
 @Component({
@@ -31,9 +34,12 @@ export const AUTH_GUARD_TOKEN = new InjectionToken<any>('auth.guard.token');
     NavbarComponent,
     FooterComponent,
     ReactiveFormsModule,
+    CarouselModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+
   providers: [
     AuthService,
     ProductsService,
@@ -51,18 +57,17 @@ export class AppComponent {
   // router: Router = inject(Router);
 
   ngOnInit() {
-    this.router.events.subscribe((routerEvent: Event) => {
-      if (routerEvent instanceof NavigationStart) {
-        this.showLoader = true;
-      }
-
-      if (
-        routerEvent instanceof NavigationEnd ||
-        routerEvent instanceof NavigationCancel ||
-        routerEvent instanceof NavigationError
-      ) {
-        this.showLoader = false;
-      }
-    });
+    // this.router.events.subscribe((routerEvent: Event) => {
+    //   if (routerEvent instanceof NavigationStart) {
+    //     this.showLoader = true;
+    //   }
+    //   if (
+    //     routerEvent instanceof NavigationEnd ||
+    //     routerEvent instanceof NavigationCancel ||
+    //     routerEvent instanceof NavigationError
+    //   ) {
+    //     this.showLoader = false;
+    //   }
+    // });
   }
 }

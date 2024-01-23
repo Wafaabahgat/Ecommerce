@@ -1,1 +1,8 @@
-<p>categories works!</p>
+<owl-carousel-o [options]="customOptions" class="py-2">
+  <ng-container *ngFor="let category of categories">
+    <ng-template carouselSlide>
+      <img height="200" [src]="category.image" />
+      <h4 class="h6 fw-bold">{{ category.name }}</h4>
+    </ng-template>
+  </ng-container>
+</owl-carousel-o>

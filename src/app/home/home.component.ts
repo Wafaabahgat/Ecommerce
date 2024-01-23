@@ -1,24 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductsService } from '../products.service';
-import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+
+
+import { MainSliderComponent } from '../main-slider/main-slider.component';
+import { CategoriesComponent } from '../categories/categories.component';
+import { AllProductsComponent } from '../all-products/all-products.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule,RouterLink],
+  imports: [
+   
+    MainSliderComponent,
+    CategoriesComponent,
+    AllProductsComponent,
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
-export class HomeComponent implements OnInit {
-  products: any[] = [];
-
-  constructor(private productsService: ProductsService) {}
-  ngOnInit() {
-    this.productsService.getProducts().subscribe({
-      next: (response) => {
-        this.products = response.data;
-      },
-    });
-  }
-}
+export class HomeComponent {}
