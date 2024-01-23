@@ -83,14 +83,21 @@
         registerForm.get('rePassword')?.touched
       "
     >
-      <p class="m-0" *ngIf="registerForm.get('rePassword')?.getError('pattern')">
+      <p
+        class="m-0"
+        *ngIf="registerForm.get('rePassword')?.getError('pattern')"
+      >
         rePassword is not pattern
       </p>
-      <p class="m-0" *ngIf="registerForm.get('rePassword')?.getError('required')">
+      <p
+        class="m-0"
+        *ngIf="registerForm.get('rePassword')?.getError('required')"
+      >
         rePassword is required
       </p>
     </div>
 
+    <!-- [disabled]="!registerForm.valid" -->
     <button
       type="submit"
       [disabled]="registerForm.invalid"
