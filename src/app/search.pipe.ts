@@ -8,7 +8,7 @@ import { Product } from './product';
 export class SearchPipe implements PipeTransform {
   transform(products: Product[], searchTerm: string): Product[] {
     return products.filter((product) => {
-      product.title.includes(searchTerm);
+      return product.title.includes(searchTerm);
     });
   }
 }

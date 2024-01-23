@@ -20,6 +20,7 @@ import { ProductsService } from './products.service';
 import { InjectionToken } from '@angular/core';
 import { AuthGuard } from './auth.guard';
 import { CarouselModule } from 'ngx-owl-carousel-o';
+import { CartService } from './cart.service';
 //import { BrowserModule } from '@angular/platform-browser';
 
 export const AUTH_GUARD_TOKEN = new InjectionToken<any>('auth.guard.token');
@@ -43,6 +44,7 @@ export const AUTH_GUARD_TOKEN = new InjectionToken<any>('auth.guard.token');
   providers: [
     AuthService,
     ProductsService,
+    CartService,
     {
       provide: AUTH_GUARD_TOKEN,
       useValue: AuthGuard,

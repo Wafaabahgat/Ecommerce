@@ -27,6 +27,9 @@
         <li *ngIf="isLogin" class="nav-item">
           <a class="nav-link active" routerLink="/brands">Brands</a>
         </li>
+        <li *ngIf="isLogin" class="nav-item">
+          <a class="nav-link active" routerLink="/dashboard">Dashboard</a>
+        </li>
       </ul>
 
       <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
@@ -46,6 +49,9 @@
           <a class="btn btn-outline-ftg" (click)="logOut()" routerLink="/login"
             >Log Out</a
           >
+        </li>
+        <li *ngIf="isLogin" class="nav-item">
+          <a class="btn btn-outline-ftg" routerLink="/setting">Settings</a>
         </li>
       </ul>
     </div>

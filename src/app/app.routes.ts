@@ -26,6 +26,16 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     component: ProductdetailsComponent,
   },
+  {
+    path: 'setting',
+    loadChildren: () =>
+      import('./setting/setting.module').then((m) => m.SettingModule),
+  },
+  {
+    path: 'dashboard',
+    loadChildren: () =>
+      import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
+  },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: '**', component: NotFoundComponent },
