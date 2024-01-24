@@ -6,6 +6,8 @@ import { FormsModule } from '@angular/forms';
 import { SearchPipe } from '../search.pipe';
 import { Product } from '../product';
 import { CartService } from '../cart.service';
+import { ToastrService } from 'ngx-toastr';
+
 @Component({
   selector: 'app-all-products',
   standalone: true,
@@ -19,12 +21,16 @@ export class AllProductsComponent implements OnInit {
 
   constructor(
     private productsService: ProductsService,
-    private _CartService: CartService
+    private _CartService: CartService,
+    private toastr: ToastrService
   ) {}
 
   addToCart(productId: string) {
     this._CartService.addToCart(productId).subscribe({
-      next: (response) => console.log(response),
+      next: (response) => {
+        this.toastr.success('Success to Add Item');
+        console.log(response);
+      },
       error: (err) => console.log(err),
     });
   }

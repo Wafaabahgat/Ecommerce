@@ -21,7 +21,7 @@ import { InjectionToken } from '@angular/core';
 import { AuthGuard } from './auth.guard';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { CartService } from './cart.service';
-//import { BrowserModule } from '@angular/platform-browser';
+import { ToastrModule } from 'ngx-toastr';
 
 export const AUTH_GUARD_TOKEN = new InjectionToken<any>('auth.guard.token');
 @Component({
@@ -36,6 +36,7 @@ export const AUTH_GUARD_TOKEN = new InjectionToken<any>('auth.guard.token');
     FooterComponent,
     ReactiveFormsModule,
     CarouselModule,
+    ToastrModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',

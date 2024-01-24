@@ -29,4 +29,20 @@ export class CartService {
       headers: this.headers,
     });
   }
+
+  removeCartItem(productId: string): Observable<any> {
+    return this._HttpClient.delete(this.url + `cart/${productId}`, {
+      headers: this.headers,
+    });
+  }
+
+  updateItemCount(productId: string, count: number): Observable<any> {
+    return this._HttpClient.put(
+      this.url + `cart/${productId}`,
+      { count: count },
+      {
+        headers: this.headers,
+      }
+    );
+  }
 }
