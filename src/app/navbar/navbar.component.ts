@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { CommonModule } from '@angular/common';
+import { CartService } from '../cart.service';
 
 @Component({
   selector: 'app-navbar',
@@ -12,8 +13,13 @@ import { CommonModule } from '@angular/common';
 })
 export class NavbarComponent {
   isLogin: boolean = false;
+  cartNum: number = 0;
+  // _cartService = Inject(CartService);
 
-  constructor(private authService: AuthService) {
+  constructor(
+    private authService: AuthService,
+    public _cartService: CartService
+  ) {
     authService.userData.subscribe({
       next: () => {
         if (authService.userData.getValue() !== null) {
@@ -22,6 +28,13 @@ export class NavbarComponent {
           this.isLogin = false;
         }
       },
+    });
+    _cartService.numberOfCartItems.subscribe({
+      next: (value) => {
+        this.cartNum = value;
+        console.log(value);
+      },
+      error: (err) => console.log(err),
     });
   }
 

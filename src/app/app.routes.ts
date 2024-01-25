@@ -9,6 +9,7 @@ import { RegisterComponent } from './register/register.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AuthGuard } from './auth.guard';
 import { ProductdetailsComponent } from './productdetails/productdetails.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -21,6 +22,7 @@ export const routes: Routes = [
   },
   { path: 'cart', canActivate: [AuthGuard], component: CartComponent },
   { path: 'brands', canActivate: [AuthGuard], component: BrandsComponent },
+  { path: 'checkout', canActivate: [AuthGuard], component: CheckoutComponent },
   {
     path: 'productdetails/:id',
     canActivate: [AuthGuard],

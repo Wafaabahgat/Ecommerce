@@ -23,7 +23,6 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { CartService } from './cart.service';
 import { ToastrModule } from 'ngx-toastr';
 
-export const AUTH_GUARD_TOKEN = new InjectionToken<any>('auth.guard.token');
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -46,10 +45,6 @@ export const AUTH_GUARD_TOKEN = new InjectionToken<any>('auth.guard.token');
     AuthService,
     ProductsService,
     CartService,
-    {
-      provide: AUTH_GUARD_TOKEN,
-      useValue: AuthGuard,
-    },
     // AuthGuard,
   ],
 })

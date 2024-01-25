@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { CartService } from '../cart.service';
 import { CommonModule } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css',
 })
@@ -21,6 +22,7 @@ export class CartComponent implements OnInit {
     this._CartService.getLoggedUserCart().subscribe({
       next: (response) => {
         this.cartDetails = response.data;
+        console.log(response.data);
       },
       error: (err) => {
         console.log(err);

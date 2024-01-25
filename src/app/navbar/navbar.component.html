@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm navbar-light bg-light">
+<nav class="navbar fixed-top navbar-expand-sm navbar-light bg-light">
   <div class="container">
     <a class="navbar-brand" href="#">Navbar</a>
     <button
@@ -33,14 +33,22 @@
       </ul>
 
       <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
-        <li class="nav-item d-flex it">
+        <!-- <li class="nav-item d-flex it">
           <i class="fab mx-2 fa-facebook"></i>
           <i class="fab mx-2 fa-twitter"></i>
           <i class="fab mx-2 fa-linkedin"></i>
           <i class="fab mx-2 fa-youtube"></i>
-        </li>
+        </li> -->
         <li *ngIf="!isLogin" class="nav-item">
           <a class="nav-link active" routerLink="/login">Login</a>
+        </li>
+        <li *ngIf="isLogin" class="nav-item px-2">
+          <a class="nav-link p-2" routerLink="/cart">
+            <i class="fas fa-cart-shopping text-main fa-lg"></i>
+            <span class="badge bg-main text-white position-absolute top-0">{{
+              cartNum
+            }}</span>
+          </a>
         </li>
         <li *ngIf="!isLogin" class="nav-item">
           <a class="nav-link active" routerLink="/register">Register</a>
@@ -50,9 +58,9 @@
             >Log Out</a
           >
         </li>
-        <li *ngIf="isLogin" class="nav-item">
+        <!-- <li *ngIf="isLogin" class="nav-item">
           <a class="btn btn-outline-ftg" routerLink="/setting">Settings</a>
-        </li>
+        </li> -->
       </ul>
     </div>
   </div>

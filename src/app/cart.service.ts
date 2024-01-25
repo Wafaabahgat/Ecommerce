@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -8,11 +8,28 @@ import { Observable } from 'rxjs';
 export class CartService {
   private url = 'https://route-ecommerce.onrender.com/api/v1/';
 
+  numberOfCartItems = new BehaviorSubject(0);
+
+  constructor(private _HttpClient: HttpClient) {
+    this.getLoggedUserCart().subscribe({
+      next: (response) => {
+        this.numberOfCartItems.next(response.numOfCartItems);
+        console.log(response);
+      },
+      error: (err) => console.log(err),
+    });
+  }
+
   headers: any = {
     token: localStorage.getItem('userToken'),
   };
-
-  constructor(private _HttpClient: HttpClient) {}
+  // headers: any;
+  // private initializeHeaders(): void {
+  //   this.headers = {
+  //     // token: this.getUserToken(),
+  //     token: localStorage.getItem('userToken'),
+  //   };
+  // }
 
   addToCart(productId: string): Observable<any> {
     return this._HttpClient.post(
@@ -40,6 +57,16 @@ export class CartService {
     return this._HttpClient.put(
       this.url + `cart/${productId}`,
       { count: count },
+      {
+        headers: this.headers,
+      }
+    );
+  }
+
+  onlinePayment(cartId: string, shippingAddress: any): Observable<any> {
+    return this._HttpClient.post(
+      this.url + `orders/checkout-session/${cartId}?url=http://localhost:4200`,
+      { shippingAddress: shippingAddress },
       {
         headers: this.headers,
       }

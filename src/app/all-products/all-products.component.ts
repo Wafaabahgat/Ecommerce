@@ -30,6 +30,7 @@ export class AllProductsComponent implements OnInit {
       next: (response) => {
         this.toastr.success('Success to Add Item');
         console.log(response);
+        this._CartService.numberOfCartItems.next(response.numOfCartItems);
       },
       error: (err) => console.log(err),
     });
