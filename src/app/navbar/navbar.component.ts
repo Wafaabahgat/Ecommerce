@@ -18,7 +18,7 @@ export class NavbarComponent {
 
   constructor(
     private authService: AuthService,
-    public _cartService: CartService
+    private _cartService: CartService
   ) {
     authService.userData.subscribe({
       next: () => {
